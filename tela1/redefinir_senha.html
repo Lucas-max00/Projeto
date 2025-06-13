@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Login | CurrículoPerfeito</title>
-    <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+    <title>Redefinir Senha | CurrículoPerfeito</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="style.css" />
 </head>
@@ -18,22 +17,20 @@
             <nav>
                 <a href="index.html">Início</a>
                 <a href="#">Sobre</a>
+                <a href="login.html">Entrar</a>
                 <a href="cadastro.html">Cadastro</a>
             </nav>
         </header>
 
         <div class="form-container">
-            <h1>Entrar na sua conta</h1>
-            <!-- Corrigido o caminho do action para apontar corretamente para o backend/login.php -->
-            <form action="../backend/login.php" method="POST">
-                <input type="email" name="email" placeholder="E-mail" required />
-                <input type="password" name="senha" placeholder="Senha" required />
-                <button type="submit">Entrar</button>
+            <h1>Redefinir Senha</h1>
+            <form action="../backend/redefinir_senha.php" method="POST">
+                <input type="hidden" name="token" id="tokenInput" />
+                <input type="password" name="nova_senha" placeholder="Nova Senha" required />
+                <input type="password" name="confirma_senha" placeholder="Confirme a Senha" required />
+                <button type="submit">Redefinir Senha</button>
             </form>
-            <p>Não tem uma conta? <a href="cadastro.html">Cadastre-se</a></p>
-            <p><a href="recuperar_senha.html">Esqueci minha senha</a></p>
-
-
+            <p><a href="login.html">Voltar ao Login</a></p>
         </div>
     </div>
 
@@ -42,6 +39,16 @@
         <a href="#">Termos</a>
         <a href="#">Política de Privacidade</a>
     </footer>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const token = params.get('token');
+        if(token) {
+            document.getElementById('tokenInput').value = token;
+        } else {
+            alert('Token inválido!');
+            window.location.href = 'login.html';
+        }
+    </script>
 </body>
 </html>
-

@@ -1,14 +1,12 @@
 <?php
 include('conexao.php');
 
-// Verifica se os dados foram enviados via POST
 if (isset($_POST['nome'], $_POST['email'], $_POST['senha'])) {
 
     $nome = trim($_POST['nome']);
     $email = trim($_POST['email']);
     $senha = $_POST['senha'];
 
-    // Validação básica dos dados
     if (empty($nome) || empty($email) || empty($senha)) {
         echo "<script>alert('Por favor, preencha todos os campos.');window.location.href='../tela1/cadastro.html';</script>";
         exit;
@@ -20,7 +18,6 @@ if (isset($_POST['nome'], $_POST['email'], $_POST['senha'])) {
 
     $senhaHash = password_hash($senha, PASSWORD_DEFAULT);
 
-    // Verifica se o email já está cadastrado usando prepared statement
     $stmt_check = $conn->prepare("SELECT id FROM usuarios WHERE email = ?");
     if (!$stmt_check) {
         echo "Erro na preparação da consulta: " . $conn->error;
@@ -31,7 +28,6 @@ if (isset($_POST['nome'], $_POST['email'], $_POST['senha'])) {
     $stmt_check->store_result();
 
     if ($stmt_check->num_rows > 0) {
-        // Email já cadastrado
         echo "<script>alert('Este e-mail já está cadastrado!');window.location.href='../tela1/cadastro.html';</script>";
         $stmt_check->close();
         $conn->close();
@@ -39,7 +35,6 @@ if (isset($_POST['nome'], $_POST['email'], $_POST['senha'])) {
     }
     $stmt_check->close();
 
-    // Insere novo usuário com prepared statement
     $stmt = $conn->prepare("INSERT INTO usuarios (nome, email, senha) VALUES (?, ?, ?)");
     if (!$stmt) {
         echo "Erro na preparação da consulta: " . $conn->error;
@@ -57,7 +52,6 @@ if (isset($_POST['nome'], $_POST['email'], $_POST['senha'])) {
     $conn->close();
 
 } else {
-    // Caso algum campo não tenha sido enviado
     echo "<script>alert('Por favor, preencha todos os campos.');window.location.href='../tela1/cadastro.html';</script>";
 }
 ?>
