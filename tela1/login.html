@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Login | CurrículoPerfeito</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <div class="content">
+        <header>
+            <div class="logo">
+                <img src="https://img.icons8.com/ios-filled/50/000000/resume.png" alt="Logo CurrículoPerfeito" />
+                <span>CurrículoPerfeito</span>
+            </div>
+            <nav>
+                <a href="index.html">Início</a>
+                <a href="#">Sobre</a>
+                <a href="cadastro.html">Cadastro</a>
+            </nav>
+        </header>
+
+        <div class="form-container">
+            <h1>Entrar na sua conta</h1>
+            <!-- Corrigido o caminho do action para apontar corretamente para o backend/login.php -->
+            <form action="../backend/login.php" method="POST">
+                <input type="email" name="email" placeholder="E-mail" required />
+                <input type="password" name="senha" placeholder="Senha" required />
+                <button type="submit">Entrar</button>
+            </form>
+            <p>Não tem uma conta? <a href="cadastro.html">Cadastre-se</a></p>
+        </div>
+    </div>
+
+    <footer>
+        <a href="#">Contato</a>
+        <a href="#">Termos</a>
+        <a href="#">Política de Privacidade</a>
+    </footer>
+</body>
+</html>
+
